@@ -116,27 +116,8 @@ TEST(TMatrix, matrices_with_different_size_are_not_equal)
 
 TEST(TMatrix, can_add_matrices_with_equal_size)
 {
-	TMatrix<int> m(3);
-	TMatrix<int> m1(3);
-
-	m[1][1] = 1;
-	m[1][2] = 2;
-	m[1][3] = 3;
-	m[2][2] = 5;
-	m[2][3] = 6;
-
-	m1[1][1] = 1;
-	m1[1][2] = 2;
-	m1[1][3] = 3;
-	m1[2][2] = 5;
-	m1[2][3] = 6;
-
-	m = m + m1;
-	EXPECT_EQ(2, m[1][1]);
-	EXPECT_EQ(4, m[1][2]);
-	EXPECT_EQ(6, m[1][3]);
-	EXPECT_EQ(10, m[2][2]);
-	EXPECT_EQ(12, m[2][3]);
+	TMatrix<int> m1(5), m2(6);
+	ASSERT_ANY_THROW(m1 + m2);
 }
 
 TEST(TMatrix, cant_add_matrices_with_not_equal_size)
@@ -148,27 +129,11 @@ TEST(TMatrix, cant_add_matrices_with_not_equal_size)
 
 TEST(TMatrix, can_subtract_matrices_with_equal_size)
 {
-	TMatrix<int> m(3);
-	TMatrix<int> m1(3);
-
-	m[1][1] = 1;
-	m[1][2] = 2;
-	m[1][3] = 3;
-	m[2][2] = 5;
-	m[2][3] = 6;
-
-	m1[1][1] = 1;
+	TMatrix<int> m1(5), m2(5), m3(5);
 	m1[1][2] = 2;
-	m1[1][3] = 3;
-	m1[2][2] = 5;
-	m1[2][3] = 6;
-	m = m - m1;
-
-	EXPECT_EQ(0, m[1][1]);
-	EXPECT_EQ(0, m[1][2]);
-	EXPECT_EQ(0, m[1][3]);
-	EXPECT_EQ(0, m[2][2]);
-	EXPECT_EQ(0, m[2][3]);
+	m2[1][2] = 3;
+	m3[1][2] = 1;
+	EXPECT_EQ(m3, m2 - m1);
 }
 
 TEST(TMatrix, cant_subtract_matrixes_with_not_equal_size)
